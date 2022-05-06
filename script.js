@@ -7,22 +7,27 @@
 
 // VARIABLES
 
-const URL = "https://www.omdbapi.com/?apikey=dbce1723&t=Die+Hard";
+const URL = "https://www.omdbapi.com/?apikey=dbce1723&t=";
 
 // ELEMENT REFERENCES
 
 const $title = $("#title");
 const $year = $("#year");
 const $rated = $("#rated");
+const $form = $("form");
+const $input = $(`input[type="text"]`);
 
 // EVENT LISTENERS
 
-
+$form.on("submit", handleGetData)
 
 // FUNCTIONS
 
-function handleGetData() {
-    $.ajax(URL).then(function(data) {
+function handleGetData(event) {
+
+    event.preventDefault();
+    const userInput = $input.val();
+    $.ajax(URL + userInput).then(function(data) {
         console.log("movie data is ready.");
         // console.log(data);
         $title.text(data.Title);
